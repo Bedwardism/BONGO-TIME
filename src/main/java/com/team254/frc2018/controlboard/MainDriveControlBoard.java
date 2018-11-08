@@ -13,41 +13,52 @@ public class MainDriveControlBoard implements IDriveControlBoard {
         return mInstance;
     }
 
-    private final Joystick mThrottleStick;
-    private final Joystick mTurnStick;
+    private final Joystick mBongo;
 
     private MainDriveControlBoard() {
-        mThrottleStick = new Joystick(Constants.kMainThrottleJoystickPort);
-        mTurnStick = new Joystick(Constants.kMainTurnJoystickPort);
+        mBongo = new Joystick(0);
     }
 
     @Override
     public double getThrottle() {
-        return mThrottleStick.getRawAxis(1);
+        if(mBongo.getRawButton(4))
+        	return 0.7;
+        if(mBongo.getRawButton(3))
+        	return -0.7;
+    	return 0;
     }
 
     @Override
     public double getTurn() {
-        return -mTurnStick.getRawAxis(0);
+    	if(mBongo.getRawButton(1))
+        	return 0.6;
+        if(mBongo.getRawButton(2))
+        	return -0.6;
+    	return 0;
+    	//return -mTurnStick.getRawAxis(0);
     }
 
     @Override
     public boolean getPoopyShoot() {
-        return mThrottleStick.getRawButton(1);
+        return mBongo.getRawButton(10);
+    	//return mThrottleStick.getRawButton(1);
     }
 
     @Override
     public boolean getQuickTurn() {
-        return mTurnStick.getRawButton(1);
+        return mBongo.getRawButton(1) || mBongo.getRawButton(2);
+    	//return mTurnStick.getRawButton(1);
     }
 
     @Override
     public boolean getOpenJaw() {
-        return mTurnStick.getRawButton(2);
+        return false;
+    	//return mTurnStick.getRawButton(2);
     }
 
     @Override
     public boolean getShoot() {
-        return mThrottleStick.getRawButton(2);
+        return false;
+    	//return mThrottleStick.getRawButton(2);
     }
 }
