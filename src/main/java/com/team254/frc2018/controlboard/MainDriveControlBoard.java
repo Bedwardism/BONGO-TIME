@@ -16,7 +16,7 @@ public class MainDriveControlBoard implements IDriveControlBoard {
     private final Joystick mBongo;
 
     private MainDriveControlBoard() {
-        mBongo = new Joystick(0);
+        mBongo = new Joystick(3);
     }
 
     @Override
