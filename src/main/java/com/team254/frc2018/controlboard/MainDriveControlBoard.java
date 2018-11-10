@@ -46,7 +46,7 @@ public class MainDriveControlBoard implements IDriveControlBoard {
 
     @Override
     public boolean getQuickTurn() {
-        return mBongo.getRawButton(1) || mBongo.getRawButton(2);
+         return ((mBongo.getRawButton(1) || mBongo.getRawButton(2)) && (!mBongo.getRawButton(3) && !mBongo.getRawButton(4)));
     	//return mTurnStick.getRawButton(1);
     }
 
